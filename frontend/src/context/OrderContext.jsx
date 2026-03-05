@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useState } from "react";
 import api from "../api/axios";
 import RootDataContext from "./RootDataContext";
 import handleRequest from "../api/requestHandler";
@@ -6,7 +6,12 @@ import handleRequest from "../api/requestHandler";
 const OrderContext = createContext();
 
 export const OrderProvider = ({ children }) => {
-  const { orders, fetchOrders } = useContext(RootDataContext);
+  const [orders, setOrders] = useState([]);
+
+  const fetchOrders = async () => {
+    const res = await handleRequest(() => api.get("/api/order"));
+    if (res) setOrders(res);
+  };
 
   const getOrderById = async (orderId) => {
     return await handleRequest(() => api.get(`/api/order/${orderId}`));
@@ -27,7 +32,7 @@ export const OrderProvider = ({ children }) => {
   };
 
   return (
-    <OrderContext.Provider value={{ orders, getOrderById, createOrder, getDeliveryOrders, completeOrder }}>
+    <OrderContext.Provider value={{ orders, fetchOrders, getOrderById, createOrder, getDeliveryOrders, completeOrder }}>
       {children}
     </OrderContext.Provider>
   );

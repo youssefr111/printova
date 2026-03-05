@@ -32,7 +32,7 @@ const HomeSection = ({ part }) => {
             
             <p className='my-2 text-wrap text-black truncate'>{part.partDescription ? part.partDescription : "No description available"}</p>
             <p className='text-base mt-4 font-semibold text-gray-500'>{part.currentPrice} EGP</p>
-            <button className='bg-indigo-500 m-4 text-white lg:px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors cursor-pointer disabled:opacity-15 disabled:cursor-default disabled:hover:bg-indigo-500' disabled={part.stockQuantity === 0} onClick={() => addToCart(part.partId)}>Add to Cart</button>
+            <button className='bg-indigo-500 m-4 text-white lg:px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors cursor-pointer disabled:opacity-15 disabled:cursor-not-allowed disabled:hover:bg-gray-500 disabled:bg-gray-500' disabled={part.stockQuantity === 0} onClick={() => addToCart(part.partId)}>{part.stockQuantity === 0 ? "Out of Stock" : "Add to Cart"}</button>
         </div>
 
     </li>

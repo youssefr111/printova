@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useState } from "react";
 import api from "../api/axios";
 import RootDataContext from "./RootDataContext";
 import handleRequest from "../api/requestHandler";
@@ -6,7 +6,12 @@ import handleRequest from "../api/requestHandler";
 const MaintenanceContext = createContext();
 
 export const MaintenanceProvider = ({ children }) => {
-  const { maintenances, fetchMaintenances } = useContext(RootDataContext);
+  const [maintenances, setMaintenances] = useState([]);
+
+  const fetchMaintenances = async () => {
+    const res = await handleRequest(() => api.get("/api/maintenance"));
+    if (res) setMaintenances(res);
+  };
 
   const getMaintenanceById = async (maintenanceId) => {
     return await handleRequest(() => api.get(`/api/maintenance/${maintenanceId}`));
@@ -27,7 +32,7 @@ export const MaintenanceProvider = ({ children }) => {
   };
 
   return (
-    <MaintenanceContext.Provider value={{ maintenances, getMaintenanceById, createMaintenance, getTechnicianMaintenances, completeMaintenance }}>
+    <MaintenanceContext.Provider value={{ maintenances, fetchMaintenances, getMaintenanceById, createMaintenance, getTechnicianMaintenances, completeMaintenance }}>
       {children}
     </MaintenanceContext.Provider>
   );

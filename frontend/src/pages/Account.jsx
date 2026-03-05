@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Missing from '../components/General/Missing';
 import useTitle from '../hooks/useTitle';
 import useAuth from '../hooks/useAuth';
@@ -9,8 +9,15 @@ import MaintenanceContext from '../context/MaintenanceContext.jsx';
 
 const Account = () => {
     const { user } = useAuth()
-    const { orders } = useContext(OrderContext)
-    const { maintenances } = useContext(MaintenanceContext)
+    const { orders, fetchOrders } = useContext(OrderContext);
+    const { maintenances, fetchMaintenances } = useContext(MaintenanceContext);
+
+    useEffect(() => {
+      if (user) {
+        fetchOrders();
+        fetchMaintenances();
+      }
+    }, [user, fetchOrders, fetchMaintenances]);
 
     const pageTitle = user && user.firstName ? `@${user.firstName}` : 'Account'
     useTitle(`${pageTitle} - Printova`)

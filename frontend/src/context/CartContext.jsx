@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useState } from "react";
 import api from "../api/axios";
 import RootDataContext from "./RootDataContext";
 import handleRequest from "../api/requestHandler";
@@ -6,7 +6,12 @@ import handleRequest from "../api/requestHandler";
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const { cart, fetchCart } = useContext(RootDataContext);
+  const [cart, setCart] = useState([]);
+
+  const fetchCart = async () => {
+    const res = await handleRequest(() => api.get("/api/cart"));
+    if (res) setCart(res);
+  };
 
   const getCart = async () => {
     const res = await handleRequest(() => api.get("/api/cart"));
@@ -43,7 +48,7 @@ export const CartProvider = ({ children }) => {
   
 
   return (
-    <CartContext.Provider value={{ cart, getCart, addToCart, updateCartItemQuantity, removeCartItem, clearCart }}>
+    <CartContext.Provider value={{ cart, fetchCart, getCart, addToCart, updateCartItemQuantity, removeCartItem, clearCart }}>
       {children}
     </CartContext.Provider>
   );

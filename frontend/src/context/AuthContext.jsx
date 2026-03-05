@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useState, useEffect } from "react";
 import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import RootDataContext from "./RootDataContext";
@@ -9,7 +9,20 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
-  const { user, setUser, fetchUser } = useContext(RootDataContext);
+  const [user, setUser] = useState(null);
+
+  const fetchUser = async () => {
+    const res = await handleRequest(() => api.get("/api/auth/me"));
+    if (res) setUser(res);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+
+    if (token) {
+      fetchUser();
+    }
+  }, []);
 
   const login = async (email, password) => {
     const res = await api.post("/api/auth/login", { email, password });
