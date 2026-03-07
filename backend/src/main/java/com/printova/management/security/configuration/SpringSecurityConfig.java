@@ -76,7 +76,7 @@ public class SpringSecurityConfig {
 
                 config.setAllowedOrigins(List.of(
                         "http://localhost:5173",
-                        "https://printova-app.vercel.app"
+                        "https://printovaa-app.vercel.app"
                 ));
 
                 config.setAllowedMethods(java.util.List.of(
