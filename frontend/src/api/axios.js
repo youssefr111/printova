@@ -3,7 +3,7 @@ import axios from "axios";
 const BASE_URL =
   window.location.hostname === "localhost"
     ? "http://localhost:8081"
-    : "https://printova.onrender.com";
+    : "https://printovaa.onrender.com";
 
 const api = axios.create({
   baseURL: BASE_URL,
