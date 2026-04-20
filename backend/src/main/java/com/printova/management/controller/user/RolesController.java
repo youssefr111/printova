@@ -20,6 +20,12 @@ public class RolesController {
         return roleService.getAllRoles();
     }
 
+    @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<?> addRole(@RequestBody RoleRequest request) {
+        return roleService.addRole(request.getRoleName());
+    }
+
     @GetMapping("/{roleId}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<?> getRoleById(@PathVariable(required = false) Integer roleId) {
@@ -29,25 +35,25 @@ public class RolesController {
         return roleService.getRoleById(roleId);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     @PostMapping("/user/{userId}")
-    public ResponseEntity<?> addRole(
+    public ResponseEntity<?> addUserRole(
             @PathVariable Long userId,
             @RequestBody RoleRequest request
     ) {
-        return roleService.addRole(userId, request.getRoleName());
+        return roleService.addUserRole(userId, request.getRoleName());
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER')")
     @DeleteMapping("/user/{userId}")
-    public ResponseEntity<?> removeRole(
+    public ResponseEntity<?> removeUserRole(
             @PathVariable Long userId,
             @RequestBody RoleRequest request
     ) {
-        return roleService.removeRole(userId, request.getRoleName());
+        return roleService.removeUserRole(userId, request.getRoleName());
     }
 
-    @PreAuthorize("hasRole('ADMIN') or #userId == principal.userId")
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER') or #userId == principal.userId")
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getUserRoles(@PathVariable Long userId) {
         return roleService.getUserRoles(userId);

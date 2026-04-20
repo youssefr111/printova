@@ -140,6 +140,11 @@ async function getRoleById() {
     setResult("roleByIdResult", await apiRequest(`/api/roles/${roleById.value}`));
 }
 
+async function addRole() {
+    setResult("addRoleResult",
+        await apiRequest("/api/roles", "POST", { roleName: addRoleName.value }));
+}
+
 async function getUserRoles() {
     setResult("userRoles",
         await apiRequest(`/api/roles/user/${getUserRolesRoleId.value}`));

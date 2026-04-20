@@ -3,29 +3,24 @@ package com.printova.management.service.user;
 import com.printova.management.dto.user.UserDTO;
 import com.printova.management.dto.user.UpdateUserRequest;
 import com.printova.management.model.user.User;
-import com.printova.management.model.user.Role;
 import com.printova.management.repository.user.UserRepository;
 import com.printova.management.repository.user.RoleRepository;
 import com.printova.management.dto.user.UserDTOMapper;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserDTOMapper userDTOMapper;
-    private final RoleRepository roleRepository;
 
     public UserServiceImpl(UserRepository userRepository, UserDTOMapper userDTOMapper, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.userDTOMapper = userDTOMapper;
-        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -65,23 +60,6 @@ public class UserServiceImpl implements UserService {
 
             user.setPhone(request.getPhoneNumber());
         }
-
-        // ================== ADMIN ONLY ROLE UPDATE ==================
-        var auth = SecurityContextHolder.getContext().getAuthentication();
-        boolean isAdmin = auth.getAuthorities().stream()
-                .map(a -> a.getAuthority())
-                .anyMatch(r -> r.equals("ROLE_ADMIN"));
-
-        if (isAdmin && request.getRoles() != null && !request.getRoles().isEmpty()) {
-            Set<Role> newRoles = request.getRoles().stream()
-                    .map(roleName -> roleRepository
-                            .findByRoleNameIgnoreCase(roleName)
-                            .orElseThrow(() -> new RuntimeException("Role not found: " + roleName)))
-                    .collect(Collectors.toSet());
-
-            user.getRoles().addAll(newRoles);
-        }
-        // ============================================================
 
         userRepository.save(user);
         return ResponseEntity.ok(userDTOMapper.apply(user));

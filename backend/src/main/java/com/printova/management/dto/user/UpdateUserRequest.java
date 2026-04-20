@@ -3,7 +3,6 @@ package com.printova.management.dto.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -14,5 +13,4 @@ public class UpdateUserRequest {
     private String phoneNumber;
     private String email;
     private String address;
-    private Set<String> roles;
 }

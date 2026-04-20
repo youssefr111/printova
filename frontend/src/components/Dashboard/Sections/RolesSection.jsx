@@ -7,7 +7,7 @@ import ResultBox from "../../ui/ResultBox";
 import { RoleContext } from "../../../context/RoleContext";
 
 const RolesSection = () => {
-  const { getAllRoles, getRoleById, getUserRoles, addUserRole, removeUserRole } = useContext(RoleContext);
+  const { getAllRoles, getRoleById, addRole,getUserRoles, addUserRole, removeUserRole } = useContext(RoleContext);
 
   // ---------- STATE ----------
   const [roleId, setRoleId] = useState("");
@@ -15,22 +15,25 @@ const RolesSection = () => {
 
   const [allRolesResult, setAllRolesResult] = useState(null);
 
-  const [userRolesUserId, setUserRolesUserId] = useState("");
-  const [userRolesResult, setUserRolesResult] = useState(null);
-
   const [addRoleForm, setAddRoleForm] = useState({});
   const [addRoleResult, setAddRoleResult] = useState(null);
 
-  const [removeRoleForm, setRemoveRoleForm] = useState({});
-  const [removeRoleResult, setRemoveRoleResult] = useState(null);
+  const [userRolesUserId, setUserRolesUserId] = useState("");
+  const [userRolesResult, setUserRolesResult] = useState(null);
+
+  const [addUserRoleForm, setAddUserRoleForm] = useState({});
+  const [addUserRoleResult, setAddUserRoleResult] = useState(null);
+
+  const [removeUserRoleForm, setRemoveUserRoleForm] = useState({});
+  const [removeUserRoleResult, setRemoveUserRoleResult] = useState(null);
 
   // ---------- HANDLERS ----------
-  const handleAddRoleChange = (e) => {
-    setAddRoleForm({ ...addRoleForm, [e.target.name]: e.target.value });
+  const handleAddUserRoleChange = (e) => {
+    setAddUserRoleForm({ ...addUserRoleForm, [e.target.name]: e.target.value });
   };
 
-  const handleRemoveRoleChange = (e) => {
-    setRemoveRoleForm({ ...removeRoleForm, [e.target.name]: e.target.value });
+  const handleRemoveUserRoleChange = (e) => {
+    setRemoveUserRoleForm({ ...removeUserRoleForm, [e.target.name]: e.target.value });
   };
 
   const handleGetAllRoles = async () => {
@@ -43,19 +46,24 @@ const RolesSection = () => {
     setRoleByIdResult(res);
   };
 
+  const handleAddRole = async () => {
+    const res = await addRole(addRoleForm.roleName);
+    setAddRoleResult(res);
+  };
+
   const handleGetUserRoles = async () => {
     const res = await getUserRoles(userRolesUserId);
     setUserRolesResult(res);
   };
 
   const handleAddUserRole = async () => {
-    const res = await addUserRole(addRoleForm.userId, addRoleForm.roleName);
-    setAddRoleResult(res);
+    const res = await addUserRole(addUserRoleForm.userId, addUserRoleForm.roleName);
+    setAddUserRoleResult(res);
   };
 
   const handleRemoveUserRole = async () => {
-    const res = await removeUserRole(removeRoleForm.userId, removeRoleForm.roleName);
-    setRemoveRoleResult(res);
+    const res = await removeUserRole(removeUserRoleForm.userId, removeUserRoleForm.roleName);
+    setRemoveUserRoleResult(res);
   };
 
   return (
@@ -83,6 +91,19 @@ const RolesSection = () => {
         <ResultBox data={roleByIdResult} />
       </div>
 
+      {/* ===== ADD ROLE ===== */}
+      <div className="mb-6 border-b border-gray-200 dark:border-gray-700 pb-4">
+        <h3 className="font-semibold text-lg mb-1">Add Role</h3>
+        <p className="text-sm text-gray-500 mb-2">Allowed Roles: Admin only</p>
+
+        <FormGrid>
+          <Input placeholder="Role Name" value={addRoleForm.roleName} onChange={(e) => setAddRoleForm({ ...addRoleForm, roleName: e.target.value })} />
+        </FormGrid>
+
+        <Button onClick={handleAddRole} className="mb-2">Add Role</Button>
+        <ResultBox data={addRoleResult} />
+      </div>
+
       {/* ===== GET USER ROLES ===== */}
       <div className="mb-6 border-b border-gray-200 dark:border-gray-700 pb-4">
         <h3 className="font-semibold text-lg mb-1">Get User Roles</h3>
@@ -104,12 +125,12 @@ const RolesSection = () => {
         </p>
 
         <FormGrid>
-          <Input name="userId" placeholder="User ID" onChange={handleAddRoleChange} />
-          <Input name="roleName" placeholder="Role Name" onChange={handleAddRoleChange} />
+          <Input name="userId" placeholder="User ID" onChange={handleAddUserRoleChange} />
+          <Input name="roleName" placeholder="Role Name" onChange={handleAddUserRoleChange} />
         </FormGrid>
 
         <Button onClick={handleAddUserRole} className="mb-2">Add User Role</Button>
-        <ResultBox data={addRoleResult} />
+        <ResultBox data={addUserRoleResult} />
       </div>
 
       {/* ===== REMOVE USER ROLE ===== */}
@@ -120,12 +141,12 @@ const RolesSection = () => {
         </p>
 
         <FormGrid>
-          <Input name="userId" placeholder="User ID" onChange={handleRemoveRoleChange} />
-          <Input name="roleName" placeholder="Role Name" onChange={handleRemoveRoleChange} />
+          <Input name="userId" placeholder="User ID" onChange={handleRemoveUserRoleChange} />
+          <Input name="roleName" placeholder="Role Name" onChange={handleRemoveUserRoleChange} />
         </FormGrid>
 
         <Button onClick={handleRemoveUserRole} className="mb-2">Remove User Role</Button>
-        <ResultBox data={removeRoleResult} />
+        <ResultBox data={removeUserRoleResult} />
       </div>
 
     </Section>

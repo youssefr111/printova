@@ -17,6 +17,10 @@ export const RoleProvider = ({ children }) => {
     return await handleRequest(() => api.get(`/api/roles`));
   };
 
+  const addRole = async (roleName) => {
+    return await handleRequest(() => api.post(`/api/roles`, { roleName }));
+  };
+
   const getUserRoles = async (userId) => {
     return await handleRequest(() => api.get(`/api/roles/user/${userId}`));
   };
@@ -30,7 +34,7 @@ export const RoleProvider = ({ children }) => {
   };
 
   return (
-    <RoleContext.Provider value={{ roles, setRoles, getRoleById, getAllRoles, getUserRoles, addUserRole, removeUserRole }}>
+    <RoleContext.Provider value={{ roles, setRoles, getRoleById, getAllRoles, addRole, getUserRoles, addUserRole, removeUserRole }}>
       {children}
     </RoleContext.Provider>
   );

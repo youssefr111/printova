@@ -45,7 +45,27 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public ResponseEntity<?> addRole(Long userId, String roleName) {
+    public ResponseEntity<?> addRole(String roleName) {
+
+        if (roleName == null || roleName.isBlank()) {
+            return ResponseEntity.badRequest()
+                    .body(Map.of("error", "Role name cannot be empty"));
+        }
+
+        if (roleRepository.findByRoleNameIgnoreCase(roleName.trim()).isPresent()) {
+            return ResponseEntity.status(409)
+                    .body(Map.of("error", "Role already exists"));
+        }
+
+        Role role = new Role();
+        role.setRoleName(roleName.trim().toUpperCase());
+        roleRepository.save(role);
+
+        return ResponseEntity.ok(Map.of("message", "Role added successfully"));
+    }
+
+    @Override
+    public ResponseEntity<?> addUserRole(Long userId, String roleName) {
 
         if (userId == null) {
             throw new RuntimeException("User ID cannot be null");
@@ -72,7 +92,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public ResponseEntity<?> removeRole(Long userId, String roleName) {
+    public ResponseEntity<?> removeUserRole(Long userId, String roleName) {
 
         if (userId == null) {
             throw new RuntimeException("User ID cannot be null");
@@ -89,6 +109,13 @@ public class RoleServiceImpl implements RoleService {
         // Prevent self-removal of ADMIN
         if (user.getEmail().equals(auth.getName()) && role.getRoleName().equalsIgnoreCase("ADMIN")) {
             return ResponseEntity.badRequest().body("You cannot remove your own ADMIN role");
+        }
+
+        boolean isProtectedAdmin = user.getEmail().equalsIgnoreCase("admin@printova.com");
+        boolean newRoleIsAdmin = role.getRoleName().equalsIgnoreCase("ADMIN");
+        if (isProtectedAdmin && !newRoleIsAdmin) {
+        return ResponseEntity.badRequest()
+                .body(Map.of("error", "This admin account cannot be downgraded"));
         }
 
         // Check permission
