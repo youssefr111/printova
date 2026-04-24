@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class UpdateUserRequest {
     private String firstName;
     private String lastName;
-    private String phoneNumber;
+    private String phone;
     private String email;
     private String address;
 }

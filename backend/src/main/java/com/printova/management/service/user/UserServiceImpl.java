@@ -50,15 +50,15 @@ public class UserServiceImpl implements UserService {
         if (request.getAddress() != null && !request.getAddress().isEmpty()) {
             user.setAddress(request.getAddress());
         }
-        if (request.getPhoneNumber() != null && !request.getPhoneNumber().isEmpty()) {
-            var existingUserWithPhone = userRepository.findByPhone(request.getPhoneNumber());
+        if (request.getPhone() != null && !request.getPhone().isEmpty()) {
+            var existingUserWithPhone = userRepository.findByPhone(request.getPhone());
 
             if (existingUserWithPhone.isPresent()
                     && !existingUserWithPhone.get().getEmail().equals(user.getEmail())) {
                 return ResponseEntity.status(400).body(Map.of("error", "Phone Number already in use"));
             }
 
-            user.setPhone(request.getPhoneNumber());
+            user.setPhone(request.getPhone());
         }
 
         userRepository.save(user);
