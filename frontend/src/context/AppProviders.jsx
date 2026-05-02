@@ -1,5 +1,6 @@
 import React from "react";
 import { RootDataProvider } from "./RootDataContext";
+import { ThemeProvider } from "./ThemeContext";
 import { AuthProvider } from "./AuthContext";
 import { RoleProvider } from "./RoleContext";
 import { CartProvider } from "./CartContext";
@@ -16,33 +17,35 @@ import { PaymentProvider } from "./PaymentContext";
 
 const AppProviders = ({ children }) => (
   <RootDataProvider>
-    <AuthProvider>
-      <RoleProvider>
-        <CategoryProvider>
-          <SupplierProvider>
-            <ServiceProvider>
-              <PartProvider>
-                <PartPriceProvider>
-                  <StockProvider>
-                    <PaymentMethodProvider>
-                      <CartProvider>
-                        <OrderProvider>
-                          <PaymentProvider>
-                            <MaintenanceProvider>
-                              {children}
-                            </MaintenanceProvider>
-                          </PaymentProvider>
-                        </OrderProvider>
-                      </CartProvider>
-                    </PaymentMethodProvider>
-                  </StockProvider>
-                </PartPriceProvider>
-              </PartProvider>
-            </ServiceProvider>
-          </SupplierProvider>
-        </CategoryProvider>
-      </RoleProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <RoleProvider>
+          <CategoryProvider>
+            <SupplierProvider>
+              <ServiceProvider>
+                <PartProvider>
+                  <PartPriceProvider>
+                    <StockProvider>
+                      <PaymentMethodProvider>
+                        <CartProvider>
+                          <OrderProvider>
+                            <PaymentProvider>
+                              <MaintenanceProvider>
+                                {children}
+                              </MaintenanceProvider>
+                            </PaymentProvider>
+                          </OrderProvider>
+                        </CartProvider>
+                      </PaymentMethodProvider>
+                    </StockProvider>
+                  </PartPriceProvider>
+                </PartProvider>
+              </ServiceProvider>
+            </SupplierProvider>
+          </CategoryProvider>
+        </RoleProvider>
+      </AuthProvider>
+    </ThemeProvider>
   </RootDataProvider>
 );
 

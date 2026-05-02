@@ -41,7 +41,7 @@ const AccountFeed = ({ user, orders, maintenances }) => {
     }, [orders, maintenances, selectedService, selectedStatus]);
 
   return (
-    <div className="flex size-full bg-white dark:bg-gray-900 md:py-8">
+    <div className="flex size-full bg-white dark:bg-indigo-950   md:py-8">
         <div className="flex flex-col w-full mx-auto my-4 lg:my-0 max-w-5xl px-4 2xl:px-0 ">
             
             {/* Header */}

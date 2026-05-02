@@ -17,7 +17,7 @@ const HomeSection = ({ part }) => {
   const { addToCart } = useContext(CartContext);
 
   return (
-    <li className='flex flex-col w-64 m-4 bg-white rounded-lg shadow-md hover:shadow-lg hover:scale-102 transition-shadow duration-300'>
+    <li className='flex flex-col w-64 m-4 bg-white dark:bg-black rounded-lg shadow-md hover:shadow-lg hover:scale-102 transition-shadow duration-300'>
 
         <div className='w-full h-48 flex items-center justify-center'>
           <img src={partImg} className='max-h-full max-w-full object-contain' alt={part.partName} />
@@ -28,11 +28,11 @@ const HomeSection = ({ part }) => {
             <h3 className=''>{part.partName}</h3>
         </div>
 
-        <div className='flex flex-col w-full justify-center bg-white px-2'>
+        <div className='flex flex-col w-full justify-center bg-white dark:bg-black px-2'>
             
-            <p className='my-2 text-wrap text-black truncate'>{part.partDescription ? part.partDescription : "No description available"}</p>
-            <p className='text-base mt-4 font-semibold text-gray-500'>{part.currentPrice} EGP</p>
-            <button className='bg-indigo-500 m-4 text-white lg:px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors cursor-pointer disabled:opacity-15 disabled:cursor-not-allowed disabled:hover:bg-gray-500 disabled:bg-gray-500' disabled={part.stockQuantity === 0} onClick={() => addToCart(part.partId)}>{part.stockQuantity === 0 ? "Out of Stock" : "Add to Cart"}</button>
+            <p className='my-2 text-wrap text-black dark:text-white truncate'>{part.partDescription ? part.partDescription : "No description available"}</p>
+            <p className='text-base mt-4 font-semibold text-gray-500 dark:text-white'>{part.currentPrice} EGP</p>
+            <button className='bg-indigo-500 dark:bg-white m-4 text-white dark:text-black lg:px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-200 transition-colors cursor-pointer disabled:opacity-15 disabled:cursor-not-allowed disabled:bg-gray-500 disabled:dark:bg-white' disabled={part.stockQuantity === 0} onClick={() => addToCart(part.partId)}>{part.stockQuantity === 0 ? "Out of Stock" : "Add to Cart"}</button>
         </div>
 
     </li>

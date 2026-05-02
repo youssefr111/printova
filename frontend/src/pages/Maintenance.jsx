@@ -6,7 +6,7 @@ const Maintenance = () => {
   useTitle('Book Maintenance - Printova')
 
   return (
-    <main className='dark:bg-gray-900'>
+    <main className='dark:bg-indigo-950'>
       
       <MaintenanceFeed />
 

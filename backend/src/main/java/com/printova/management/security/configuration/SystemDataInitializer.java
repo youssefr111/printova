@@ -81,7 +81,6 @@ public class SystemDataInitializer implements CommandLineRunner {
     // ================= MAINTENANCE STATUS =================
 
     private void initializeMaintenanceStatuses() {
-
         createMaintenanceStatusIfNotExists("Scheduled");
         createMaintenanceStatusIfNotExists("In Progress");
         createMaintenanceStatusIfNotExists("Completed");

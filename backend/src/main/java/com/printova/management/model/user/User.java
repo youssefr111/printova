@@ -30,7 +30,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -42,9 +42,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String address;
 
-    // @ManyToOne
-    // @JoinColumn(name = "role_id")
-    // private Role role;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "user_role",
@@ -69,10 +66,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String getUsername() {
-        return email;
-    }
-
+    public String getUsername() {return email;}
     @Override public boolean isAccountNonExpired() { return true; }
     @Override public boolean isAccountNonLocked() { return true; }
     @Override public boolean isCredentialsNonExpired() { return true; }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import logo from "../../assets/logo.png";
 import { GoTriangleDown } from "react-icons/go";
 import { FaLock, FaShoppingCart, FaWrench } from "react-icons/fa";
+import ThemeButton from '../ui/ThemeButton';
 import AuthDropdown from './AuthDropdown';
 import AuthContext from '../../context/AuthContext.jsx';
 
@@ -37,9 +38,11 @@ const Header = () => {
             <FaShoppingCart className='size-5' />
           </div>
 
-          <div className='text-white rounded-full cursor-pointer hover:bg-indigo-900/40 p-2' onClick={() => navigate("/maintenance")}>
+          <div className='text-white rounded-full cursor-pointer hover:bg-indigo-900/40 p-2 mr-6' onClick={() => navigate("/maintenance")}>
             <FaWrench className='size-5' />
           </div>
+
+          <ThemeButton />
 
           <div className='flex relative group ml-6' ref={dropdownRef}>
 

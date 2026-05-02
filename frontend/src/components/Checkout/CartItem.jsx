@@ -23,9 +23,9 @@ const CartItem = ({ item, updateCartItemQuantity, removeCartItem }) => {
 
             <div className='flex flex-col lg:flex-row justify-center lg:items-center lg:justify-evenly'>
                 <div className='text-sm lg:text-base lg:mr-10 self-center lg:self-start items-center lg:items-start'>
-                    <h3 className=" text-gray-900">{item.partName}</h3>
+                    <h3 className="text-gray-900 dark:text-white">{item.partName}</h3>
 
-                    <dl className="mt-0.5 space-y-px text-gray-600">
+                    <dl className="mt-0.5 space-y-px text-gray-600 dark:text-gray-300">
                         <div className='text-xs lg:text-sm'>
                             <dt className="inline">Price: </dt>
                             <dd className="inline">{item.unitPrice} EGP</dd>

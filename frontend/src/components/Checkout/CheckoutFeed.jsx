@@ -14,7 +14,7 @@ const CheckoutFeed = ({ cart, services }) => {
             
         <div className="flex flex-col justify-center">
             <div className='flex flex-row flex-wrap justify-evenly items-center'>
-                <h2 className="font-manrope font-extrabold text-3xl lead-10 text-black text-center">Shopping Cart</h2>
+                <h2 className="font-manrope font-extrabold text-3xl lead-10 text-black dark:text-white text-center">Shopping Cart</h2>
                 {cart && cart.items && cart.items.length > 0 && (
                     <button className="m-4 cursor-pointer text-red-500 text-base font-medium hover:text-red-600 transition-colors" onClick={() => { if (window.confirm("Are you sure you want to clear the cart?")) {clearCart();}}}>
                         Clear Cart
@@ -32,7 +32,7 @@ const CheckoutFeed = ({ cart, services }) => {
                     {cart && cart.items && cart.items.length > 0 ? (
                         cart.items.map(item => <CartItem item={item} updateCartItemQuantity={updateCartItemQuantity} removeCartItem={removeCartItem} key={item.partId} />)
                     ) : (
-                        <p className="text-gray-500 text-center">Your cart is empty.</p>
+                        <p className="text-gray-500 dark:text-gray-300 text-center">Your cart is empty.</p>
                     )}
                 </ul>
             </div>

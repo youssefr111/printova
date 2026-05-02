@@ -62,16 +62,16 @@ const RegisterFeed = () => {
   const minDate = today.toISOString().split("T")[0]; // YYYY-MM-DD
 
   return (
-    <div className="flex items-center my-44 bg-white dark:bg-gray-900">  
+    <div className="flex items-center my-44 bg-white dark:bg-indigo-950">  
       <div className="container mx-auto max-w-md my-10">
           <div className="text-center">
             <h1 className="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">Book Maintenance</h1>
-            <p className="text-gray-500 dark:text-gray-400">Book a maintenance service</p>
+            <p className="text-gray-500 dark:text-gray-300">Book a maintenance service</p>
           </div>
           <div className="m-7">
             <form onSubmit={handleSubmit}>
               <div className="mb-6">
-                <label htmlFor="description" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">Description</label>
+                <label htmlFor="description" className="block mb-2 text-sm text-gray-600 dark:text-gray-300">Description</label>
                 <input
                   type="text"
                   name="description"
@@ -80,11 +80,11 @@ const RegisterFeed = () => {
                   onChange={handleFormChange}
                   autoComplete="off"
                   required
-                  className={`w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500`}
+                  className={`w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500`}
                 />
               </div>
               <div className="mb-6">
-                <label htmlFor="address" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">Address</label>
+                <label htmlFor="address" className="block mb-2 text-sm text-gray-600 dark:text-gray-300">Address</label>
                 <input
                   type="text"
                   name="address"
@@ -93,11 +93,11 @@ const RegisterFeed = () => {
                   onChange={handleFormChange}
                   autoComplete="off"
                   required
-                  className={`w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500`}
+                  className={`w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500`}
                 />
               </div>
               <div className="mb-6">
-                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-300">
                   Date
                 </label>
                 <input
@@ -107,12 +107,12 @@ const RegisterFeed = () => {
                   onChange={handleFormChange}
                   min={minDate}
                   required
-                  className="w-full px-3 py-2 border rounded-md"
+                  className="w-full px-3 py-2 border rounded-md dark:text-gray-200"
                 />
               </div>
 
-              <div className="mb-6">
-                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+              <div className="mb-6 ">
+                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                   Hour (minutes always 00, 9AM–4PM)
                 </label>
                 <input
@@ -124,7 +124,7 @@ const RegisterFeed = () => {
                   max="16:00"
                   step={3600}
                   required
-                  className="w-full px-3 py-2 border rounded-md"
+                  className="w-full px-3 py-2 border rounded-md dark:text-gray-200"
                 />
               </div>
 

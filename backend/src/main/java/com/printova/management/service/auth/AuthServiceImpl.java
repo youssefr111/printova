@@ -180,21 +180,7 @@ public class AuthServiceImpl implements AuthService {
 
         return ResponseEntity.ok(response);
     }
-
-    // @Override
-    // public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-    //     final String authHeader = request.getHeader("Authorization");
-    //     if (authHeader == null || !authHeader.startsWith("Bearer ")) { return ResponseEntity.badRequest().build();}
-    //     final String token = authHeader.substring(7);
-    //     var storedToken = tokenRepository.findByToken(token).orElse(null);
-    //     if (storedToken != null) {
-    //         storedToken.setExpired(true);
-    //         storedToken.setRevoked(true);
-    //         tokenRepository.save(storedToken);
-    //     }
-    //     return ResponseEntity.ok().build();
-    // }
-
+    
     private void saveUserToken(User user, String jwtToken) {
         Token token = Token.builder()
                 .user(user)
@@ -225,10 +211,5 @@ public class AuthServiceImpl implements AuthService {
             });
             refreshTokenService.saveAll(validRefreshTokens);
         }
-    }
-
-    @Override
-    public ResponseEntity<?> verifyCode(String email, String code) {
-        throw new UnsupportedOperationException("verifyCode method is not implemented yet");
     }
 }

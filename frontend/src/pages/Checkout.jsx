@@ -23,7 +23,7 @@ const Checkout = () => {
     }, [user, fetchCart, fetchServices]);
 
   return (
-    <main className='flex flex-col bg-[#f7f7f8] grow w-full mt-20 dark:bg-[#0e0e10] z-50 font-family-poppins'>
+    <main className='flex flex-col bg-[#f7f7f8] grow w-full mt-20 dark:bg-indigo-950 z-50 font-family-poppins'>
       <CheckoutFeed cart={cart} services={services} />
     </main>
   )

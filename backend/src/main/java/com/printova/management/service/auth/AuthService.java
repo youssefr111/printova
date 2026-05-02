@@ -14,5 +14,4 @@ public interface AuthService {
     ResponseEntity<?> login(AuthRequest request);
     ResponseEntity<?> refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException;
     ResponseEntity<?> changePassword(ChangePasswordRequest request);
-    ResponseEntity<?> verifyCode(String phoneNumber, String code);
 }

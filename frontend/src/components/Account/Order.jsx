@@ -12,15 +12,15 @@ const Order = ({ order }) => {
       <div className='flex flex-wrap flex-row w-full justify-center gap-6 lg:justify-between items-center mb-4'>
         <dl className="">
             <dt className="text-sm lg:text-base font-semibold text-black dark:text-white">Order Id: </dt>
-            <dd className="text-xs lg:text-sm text-gray-500 dark:text-white">{order ? order.orderId : "Unknown"}</dd>
+            <dd className="text-xs lg:text-sm text-gray-500 dark:text-white">{order && order.orderId ? order.orderId : "Unknown"}</dd>
         </dl>
         <dl className="">
             <dt className="text-sm lg:text-base font-semibold text-black dark:text-white">Created At: </dt>
-            <dd className="text-xs text-gray-500 dark:text-white">{order ? format(new Date(order.createdAt), "PPpp") : "Unknown"}</dd>
+            <dd className="text-xs text-gray-500 dark:text-white">{order && order.createdAt ? format(new Date(order.createdAt), "PPpp") : "Unknown"}</dd>
         </dl>
         <dl className="">
             <dt className="text-sm lg:text-base font-semibold text-black dark:text-white">Completed At: </dt>
-            <dd className="text-xs text-gray-500 dark:text-white">{order ? format(new Date(order.completedAt), "PPpp") : "Unknown"}</dd>
+            <dd className="text-xs text-gray-500 dark:text-white">{order && order.completedAt ? format(new Date(order.completedAt), "PPpp") : "Unknown"}</dd>
         </dl>
         <dl className="">
             <dt className="text-sm lg:text-base font-semibold text-black dark:text-white">Order Status: </dt>
