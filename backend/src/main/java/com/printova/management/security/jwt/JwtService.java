@@ -57,7 +57,7 @@ public class JwtService {
         Map<String, Object> claims = new HashMap<>();
         claims.put("email", userDetails.getEmail());
         claims.put("type", "access");
-        return buildToken(claims, userDetails, SecurityConstants.JWT_ACCES_EXPIRATION, accessKey);
+        return buildToken(claims, userDetails, SecurityConstants.JWT_ACCESS_EXPIRATION, accessKey);
     }
 
     private String buildToken(Map<String, Object> claims, User userDetails, long expirationTime, Key key) {

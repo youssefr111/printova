@@ -1,11 +1,26 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import MaintenanceContext from '../../context/MaintenanceContext.jsx';
+import ServiceContext from '../../context/ServiceContext.jsx';
 
 const RegisterFeed = () => {
   const navigate = useNavigate()
   const { createMaintenance } = useContext(MaintenanceContext);
+  const { services, fetchServices } = useContext(ServiceContext);
+  const maintenanceService = services.find((s) => s.serviceName === "MAINTENANCE");
+  const maintenancePrice = maintenanceService?.servicePrice;
+  useEffect(() => {
+    fetchServices();
+  }, []);
+
   const [form, setForm] = useState({});
+  const [notification, setNotification] = useState(null);
+
+  const showNotification = (type, message) => {
+      console.log("SHOWING NOTIFICATION");
+      setNotification({ type, message });
+      setTimeout(() => setNotification(null), 1000);
+  };
 
   const handleFormChange = (e) => {
     setForm({
@@ -47,17 +62,24 @@ const RegisterFeed = () => {
 
     const datetime = `${form.date}T${form.time}:00`;
     try {
-      await createMaintenance({
+
+      const res = await createMaintenance({
         description: form.description,
         address: form.address,
         date: datetime
       });
-      navigate("/account");
+
+      if (res?.statusCodeValue === 200) {
+        showNotification('success', 'Maintenance booked successfully!');
+        setTimeout(() => navigate("/account"), 1000);
+      } else {
+        showNotification('error', `Failed to book maintenance.`);
+      }
     } catch (err) {
       console.error("Failed to book maintenance:", err);
     }
   };
-
+  
   const today = new Date();
   const minDate = today.toISOString().split("T")[0]; // YYYY-MM-DD
 
@@ -129,9 +151,26 @@ const RegisterFeed = () => {
               </div>
 
               <div className="mb-6">
+                <div className="mb-6 flex items-center justify-between bg-indigo-50 dark:bg-indigo-900/40 border border-indigo-200 dark:border-indigo-700 rounded-lg px-4 py-3">
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Service Fee</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Cash on Delivery</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xl font-bold text-indigo-600 dark:text-indigo-300">{maintenancePrice || "Unknown"} EGP</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Due on arrival</p>
+                  </div>
+                </div>
                 <button type="submit" disabled={getMinTime() > "16:00"} className="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:outline-none disabled:opacity-50 hover:bg-indigo-700 transition-colors cursor-pointer">
                   Book Maintenance
                 </button>
+
+                {notification && (
+                    <div className={`flex m-4 p-4 rounded-lg shadow-lg text-white font-medium transition-all
+                        ${notification.type === 'success' ? 'bg-green-500' : 'bg-red-500'}`}>
+                        {notification.type === 'success' ? '✓' : '✕'} {notification.message}
+                    </div>
+                )}
               </div>
 
             </form>

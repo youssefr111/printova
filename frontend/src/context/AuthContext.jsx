@@ -70,8 +70,20 @@ export const AuthProvider = ({ children }) => {
     return res;
   };
 
-  const updateUser = async (updatedData) => {
+  // const updateUser = async (updatedData) => {
+  //   const res = await handleRequest(() => api.put(`/api/user/${user.id}`, updatedData));
+  //   fetchUser();
+  //   return res;
+  // };
+
+  const updateProfile = async (updatedData) => {
     const res = await handleRequest(() => api.put(`/api/user/${user.id}`, updatedData));
+    fetchUser();
+    return res;
+  };
+
+  const updateUserById = async (updatedData) => {
+    const res = await handleRequest(() => api.put(`/api/user/${updatedData.id}`, updatedData));
     fetchUser();
     return res;
   };
@@ -79,7 +91,7 @@ export const AuthProvider = ({ children }) => {
   const hasRole = (roleName) => user?.roles?.some(role => role.roleName === roleName);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, register, changePassword, hasRole, getUserById, getAllUsers, updateUser }}>
+    <AuthContext.Provider value={{ user, login, logout, register, changePassword, hasRole, getUserById, getAllUsers, updateProfile, updateUserById }}>
       {children}
     </AuthContext.Provider>
   );

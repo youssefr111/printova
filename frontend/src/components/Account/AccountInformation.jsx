@@ -5,7 +5,7 @@ import Button from '../ui/Button';
 import AuthContext from '../../context/AuthContext';
 
 const AccountInformation = ({ user, isEditing, setIsEditing }) => {
-    const { updateUser, changePassword } = useContext(AuthContext);
+    const { updateProfile, changePassword } = useContext(AuthContext);
     const [showPasswordSection, setShowPasswordSection] = useState(false);
     const [formData, setFormData] = useState({
         firstName: "",
@@ -58,7 +58,7 @@ const AccountInformation = ({ user, isEditing, setIsEditing }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await updateUser(formData);
+            await updateProfile(formData);
             setIsEditing(false);
         } catch (error) {
         console.error("Failed to update user", error);

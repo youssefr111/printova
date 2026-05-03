@@ -7,7 +7,7 @@ import ResultBox from "../../ui/ResultBox";
 import PartContext from "../../../context/PartContext";
 
 const PartsSection = () => {
-  const { getAllParts, getPartById, addPart, updatePart, deletePart } = useContext(PartContext);
+  const { getAllParts, getPartById, addPart, updatePart, removePart } = useContext(PartContext);
 
   // ---------- STATE ----------
   const [allPartsResult, setAllPartsResult] = useState(null);
@@ -54,7 +54,7 @@ const PartsSection = () => {
   };
 
   const handleDelete = async () => {
-    const res = await deletePart(deleteId);
+    const res = await removePart(deleteId);
     setDeleteResult(res);
   };
 

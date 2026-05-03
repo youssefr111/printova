@@ -20,11 +20,13 @@ const Order = ({ order }) => {
         </dl>
         <dl className="">
             <dt className="text-sm lg:text-base font-semibold text-black dark:text-white">Completed At: </dt>
-            <dd className="text-xs text-gray-500 dark:text-white">{order && order.completedAt ? format(new Date(order.completedAt), "PPpp") : "Unknown"}</dd>
+            <dd className="text-xs text-gray-500 dark:text-white">{order && order.completedAt ? format(new Date(order.completedAt), "PPpp") : "Not Completed"}</dd>
         </dl>
         <dl className="">
             <dt className="text-sm lg:text-base font-semibold text-black dark:text-white">Order Status: </dt>
-            <dd className="text-xs lg:text-sm text-gray-500 dark:text-white">{order && order.orderStatus ? order.orderStatus : "Unknown"}</dd>
+            <dd className={`text-xs font-medium px-2 py-0.5 rounded-full inline-block mt-1 ${order?.orderStatus === 'Completed' ? 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400' : 'bg-amber-100 text-amber-600 dark:bg-amber-900/40 dark:text-amber-400'}`}>
+            {order && order.orderStatus ? order.orderStatus : "Unknown"}
+            </dd>
         </dl>
         <dl className="">
             <dt className="text-sm lg:text-base font-semibold text-black dark:text-white">Delivery Fee: </dt>

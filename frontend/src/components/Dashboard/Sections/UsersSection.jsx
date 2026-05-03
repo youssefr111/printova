@@ -7,7 +7,7 @@ import ResultBox from "../../ui/ResultBox";
 import AuthContext from "../../../context/AuthContext";
 
 const UsersSection = () => {
-  const { getUserById, getAllUsers, updateUser, changePassword } = useContext(AuthContext);
+  const { getUserById, getAllUsers, updateUserById, changePassword } = useContext(AuthContext);
 
   // ---------- STATE ----------
   const [getUserId, setGetUserId] = useState("");
@@ -41,7 +41,7 @@ const UsersSection = () => {
   };
 
   const handleUpdateUser = async () => {
-    const res = await updateUser(updateForm);
+    const res = await updateUserById(updateForm);
     setUpdateResult(res);
   };
 

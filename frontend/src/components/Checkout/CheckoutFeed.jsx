@@ -1,17 +1,47 @@
-import React, { useContext } from 'react';
+import { useContext, useState } from 'react';
 import CartItem from './CartItem';
+import { useNavigate } from "react-router-dom";
 import OrderContext from '../../context/OrderContext';
 import CartContext from '../../context/CartContext';
 
 const CheckoutFeed = ({ cart, services }) => {
+    const navigate = useNavigate()
     const deliveryService = services ? services.find((service) => service.serviceName.toLowerCase() === "DELIVERY".toLowerCase()) : null;
     const { createOrder } = useContext(OrderContext);
     const { updateCartItemQuantity, removeCartItem, clearCart } = useContext(CartContext);
-    const [address, setAddress] = React.useState("");
+    const [address, setAddress] = useState("");
+    const [notification, setNotification] = useState(null);
+
+    const showNotification = (type, message) => {
+        console.log("SHOWING NOTIFICATION");
+        setNotification({ type, message });
+        setTimeout(() => setNotification(null), 1000);
+    };
+
+    const handlePlaceOrder = async (e) => {
+        e.preventDefault();
+
+        try {
+            const res = await createOrder(address);
+
+            if (res?.statusCodeValue === 200) {
+                showNotification('success', 'Order placed successfully!');
+                setAddress("");
+                setTimeout(() => navigate("/account"), 1000);
+            } else {
+                showNotification('error', 'Failed to place order.');
+                setTimeout(() => window.location.reload(), 1000);
+            }
+        } catch (err) {
+            console.error("Failed to place order:", err);
+            showNotification('error', 'Something went wrong.');
+            setTimeout(() => window.location.reload(), 1000);
+        }
+    };
 
   return (
     <div className='flex flex-col w-full px-4 sm:px-6 lg:px-12 my-6 overflow-x-hidden'>
-            
+
         <div className="flex flex-col justify-center">
             <div className='flex flex-row flex-wrap justify-evenly items-center'>
                 <h2 className="font-manrope font-extrabold text-3xl lead-10 text-black dark:text-white text-center">Shopping Cart</h2>
@@ -49,12 +79,18 @@ const CheckoutFeed = ({ cart, services }) => {
                 </div>
                 <div className="flex items-center justify-between mb-6">
                     <span className="font-normal text-lg text-gray-500">Total</span>
-                    <span className="font-semibold text-lg text-green-600">{cart ? cart.totalAmount + (deliveryService ? deliveryService.servicePrice : 0) : "0"} EGP</span>
+                    <span className="font-semibold text-lg text-green-600">{cart ? (cart.totalAmount ? cart.totalAmount : 0) + (deliveryService ? deliveryService.servicePrice : 0) : "0"} EGP</span>
                 </div>
-                <form className='flex flex-col w-full' onSubmit={(e) => { e.preventDefault(); createOrder(address);}}>
+                <form className='flex flex-col w-full' onSubmit={handlePlaceOrder}>
                     <input type="text" placeholder="Address" className='mb-4 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500' value={address} onChange={(e) => setAddress(e.target.value)} />
                     <button className="bg-indigo-500 hover:bg-indigo-600 px-6 py-3 text-white rounded active:scale-95 transition-all cursor-pointer disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:bg-indigo-500 disabled:active:scale-100" disabled={!cart.items || !address} type='submit' >Place Order</button> 
                 </form>
+                {notification && (
+                    <div className={`flex m-4 p-4 rounded-lg shadow-lg text-white font-medium transition-all
+                        ${notification.type === 'success' ? 'bg-green-500' : 'bg-red-500'}`}>
+                        {notification.type === 'success' ? '✓' : '✕'} {notification.message}
+                    </div>
+                )}
                 
             </div>
 

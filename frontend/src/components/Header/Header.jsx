@@ -7,6 +7,7 @@ import { FaLock, FaShoppingCart, FaWrench } from "react-icons/fa";
 import ThemeButton from '../ui/ThemeButton';
 import AuthDropdown from './AuthDropdown';
 import AuthContext from '../../context/AuthContext.jsx';
+import CartContext from '../../context/CartContext.jsx';
 
 const Header = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -14,6 +15,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const { user, hasRole, logout, isLoading } = useContext(AuthContext);
+  const { cart } = useContext(CartContext);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -34,8 +36,13 @@ const Header = () => {
         <img className="cursor-pointer h-full w-auto" src={logo} alt='logo' onClick={() => navigate("/")}/>
 
         <div className="flex items-center gap-3">
-          <div className='text-white rounded-full cursor-pointer hover:bg-indigo-900/40 p-2 mr-4' onClick={() => navigate("/checkout")}>
+          <div className='relative text-white rounded-full cursor-pointer hover:bg-indigo-900/40 p-2 mr-4' onClick={() => navigate("/checkout")}>
             <FaShoppingCart className='size-5' />
+            {cart?.items?.length > 0 && (
+              <span className='absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] flex items-center justify-center px-1'>
+                {cart.items.length > 99 ? "99+" : cart.items.length}
+              </span>
+            )}
           </div>
 
           <div className='text-white rounded-full cursor-pointer hover:bg-indigo-900/40 p-2 mr-6' onClick={() => navigate("/maintenance")}>

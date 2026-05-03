@@ -7,7 +7,7 @@ import ResultBox from "../../ui/ResultBox";
 import ServiceContext from "../../../context/ServiceContext";
 
 const ServicesSection = () => {
-  const { getAllServices, getServiceById, addService, updateService, deleteService } = useContext(ServiceContext);
+  const { getAllServices, getServiceById, addService, updateService, removeService } = useContext(ServiceContext);
 
   // ---------- STATE ----------
   const [allServicesResult, setAllServicesResult] = useState(null);
@@ -54,7 +54,7 @@ const ServicesSection = () => {
   };
 
   const handleDelete = async () => {
-    const res = await deleteService(deleteId);
+    const res = await removeService(deleteId);
     setDeleteResult(res);
   };
 

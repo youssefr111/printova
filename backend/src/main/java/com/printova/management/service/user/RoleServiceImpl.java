@@ -113,7 +113,7 @@ public class RoleServiceImpl implements RoleService {
 
         boolean isProtectedAdmin = user.getEmail().equalsIgnoreCase("admin@printova.com");
         boolean newRoleIsAdmin = role.getRoleName().equalsIgnoreCase("ADMIN");
-        if (isProtectedAdmin && !newRoleIsAdmin) {
+        if (isProtectedAdmin && newRoleIsAdmin) {
         return ResponseEntity.badRequest()
                 .body(Map.of("error", "This admin account cannot be downgraded"));
         }

@@ -7,7 +7,7 @@ import ResultBox from "../../ui/ResultBox";
 import PaymentMethodContext from "../../../context/PaymentMethodContext";
 
 const PaymentMethodsSection = () => {
-  const { getAllPaymentMethods, getPaymentMethodById, addPaymentMethod, updatePaymentMethod, deletePaymentMethod } = useContext(PaymentMethodContext);
+  const { getAllPaymentMethods, getPaymentMethodById, addPaymentMethod, updatePaymentMethod, removePaymentMethod } = useContext(PaymentMethodContext);
 
   // ---------- STATE ----------
   const [allPaymentMethodsResult, setAllPaymentMethodsResult] = useState(null);
@@ -54,7 +54,7 @@ const PaymentMethodsSection = () => {
   };
 
   const handleDelete = async () => {
-    const res = await deletePaymentMethod(deleteId);
+    const res = await removePaymentMethod(deleteId);
     setDeleteResult(res);
   };
 

@@ -13,7 +13,9 @@ const Maintenance = ({ maintenance }) => {
         </dl>
         <dl className="">
             <dt className="text-sm lg:text-base font-semibold text-black dark:text-white">Maintenance Status: </dt>
-            <dd className="text-xs lg:text-sm text-gray-500 dark:text-white">{maintenance && maintenance.maintenanceStatus ? maintenance.maintenanceStatus : "Unknown"}</dd>
+            <dd className={`text-xs font-medium px-2 py-0.5 rounded-full inline-block mt-1 ${maintenance?.maintenanceStatus === 'Completed' ? 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400' : 'bg-amber-100 text-amber-600 dark:bg-amber-900/40 dark:text-amber-400'}`}>
+              {maintenance && maintenance.maintenanceStatus ? maintenance.maintenanceStatus : "Unknown"}
+            </dd>
         </dl>
         <dl className="">
             <dt className="text-sm lg:text-base font-semibold text-black dark:text-white">Scheduled At: </dt>

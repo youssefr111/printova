@@ -98,7 +98,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
                         .orElseThrow(() -> new RuntimeException("Scheduled maintenance status not found"));
 
                 // =========================
-                // Select Technician User with no maintenance at same time or 3 hours before/after
+                // Select Technician User with no maintenance at same time or 2 hours before/after
                 // =========================
                 Role technicianRole = roleRepository
                         .findByRoleNameIgnoreCase("TECHNICIAN")
@@ -107,8 +107,8 @@ public class MaintenanceServiceImpl implements MaintenanceService {
                 List<User> technicianUsers = userRepository.findByRolesContaining(technicianRole);
 
                 LocalDateTime requestedDate = request.getDate();
-                LocalDateTime startWindow = requestedDate.minusHours(3);
-                LocalDateTime endWindow = requestedDate.plusHours(3);
+                LocalDateTime startWindow = requestedDate.minusHours(2);
+                LocalDateTime endWindow = requestedDate.plusHours(2);
 
                 User availableTechnician = technicianUsers.stream()
                         .filter(user ->
@@ -311,6 +311,14 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
                 if (day == DayOfWeek.FRIDAY || day == DayOfWeek.SATURDAY) {
                         throw new RuntimeException("Maintenance cannot be on Friday or Saturday");
+                }
+
+                LocalDateTime now = LocalDateTime.now();
+                boolean isToday = dateTime.toLocalDate().isEqual(now.toLocalDate());
+                boolean isBefore9AM = now.toLocalTime().isBefore(java.time.LocalTime.of(9, 0));
+
+                if (isToday && !isBefore9AM) {
+                        throw new RuntimeException("Same-day maintenance booking is not allowed after 09:00 AM");
                 }
         }
 }
