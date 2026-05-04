@@ -148,7 +148,7 @@ public class RoleServiceImpl implements RoleService {
         if (isManager) {
             // Manager can only modify DELIVERY or TECHNICIAN
             String roleName = targetRole.getRoleName().toUpperCase();
-            return roleName.equals("DELIVERY") || roleName.equals("TECHNICIAN");
+            return roleName.equals("DELIVERY") || roleName.equals("TECHNICIAN") || roleName.equals("CUSTOMER");
         }
 
         return false; // other users cannot modify roles
