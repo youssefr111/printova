@@ -5,6 +5,7 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import ResultBox from "../../ui/ResultBox";
 import ServiceContext from "../../../context/ServiceContext";
+import ServiceResultBox from "../ResultBoxes/ServiceResultBox";
 
 const ServicesSection = () => {
   const { getAllServices, getServiceById, addService, updateService, removeService } = useContext(ServiceContext);
@@ -67,7 +68,7 @@ const ServicesSection = () => {
 
         <Button onClick={handleGetAll} className="mb-2">Get All Services</Button>
 
-        <ResultBox data={allServicesResult} />
+        <ServiceResultBox data={allServicesResult} />
       </div>
 
       {/* ===== GET BY ID ===== */}
@@ -80,7 +81,7 @@ const ServicesSection = () => {
 
         <Button onClick={handleGetById} className="mb-2">Get Service</Button>
 
-        <ResultBox data={serviceResult} />
+        <ServiceResultBox data={serviceResult} />
       </div>
 
       {/* ===== ADD ===== */}
@@ -97,7 +98,7 @@ const ServicesSection = () => {
 
         <Button onClick={handleAdd} className="mb-2">Add Service</Button>
 
-        <ResultBox data={addResult} />
+        <ServiceResultBox data={addResult} />
       </div>
 
       {/* ===== UPDATE ===== */}
@@ -113,7 +114,7 @@ const ServicesSection = () => {
 
         <Button onClick={handleUpdate} className="mb-2">Update Service</Button>
 
-        <ResultBox data={updateResult} />
+        <ServiceResultBox data={updateResult} />
       </div>
 
       {/* ===== DELETE ===== */}
@@ -127,7 +128,7 @@ const ServicesSection = () => {
 
         <Button onClick={handleDelete} variant="danger" className="mb-2">Delete Service</Button>
 
-        <ResultBox data={deleteResult} />
+        <ServiceResultBox data={deleteResult} />
       </div>
 
     </Section>

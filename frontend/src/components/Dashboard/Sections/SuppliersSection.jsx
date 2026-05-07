@@ -5,6 +5,7 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import ResultBox from "../../ui/ResultBox";
 import SupplierContext from "../../../context/SupplierContext";
+import SupplierResultBox from "../ResultBoxes/SupplierResultBox";
 
 const SuppliersSection = () => {
   const { getAllSuppliers, getSupplierById, addSupplier, updateSupplier, deleteSupplier } = useContext(SupplierContext);
@@ -67,7 +68,7 @@ const SuppliersSection = () => {
 
         <Button onClick={handleGetAll} className="mb-2">Get All Suppliers</Button>
 
-        <ResultBox data={allSuppliersResult} />
+        <SupplierResultBox data={allSuppliersResult} />
       </div>
 
       {/* ===== GET BY ID ===== */}
@@ -80,7 +81,7 @@ const SuppliersSection = () => {
 
         <Button onClick={handleGetById} className="mb-2">Get Supplier</Button>
 
-        <ResultBox data={supplierResult} />
+        <SupplierResultBox data={supplierResult} />
       </div>
 
       {/* ===== ADD ===== */}
@@ -98,7 +99,7 @@ const SuppliersSection = () => {
 
         <Button onClick={handleAdd} className="mb-2">Add Supplier</Button>
 
-        <ResultBox data={addResult} />
+        <SupplierResultBox data={addResult} />
       </div>
 
       {/* ===== UPDATE ===== */}
@@ -115,7 +116,7 @@ const SuppliersSection = () => {
 
         <Button onClick={handleUpdate} className="mb-2">Update Supplier</Button>
 
-        <ResultBox data={updateResult} />
+        <SupplierResultBox data={updateResult} />
       </div>
 
       {/* ===== DELETE ===== */}
@@ -129,7 +130,7 @@ const SuppliersSection = () => {
 
         <Button onClick={handleDelete} variant="danger" className="mb-2">Delete Supplier</Button>
 
-        <ResultBox data={deleteResult} />
+        <SupplierResultBox data={deleteResult} />
       </div>
 
     </Section>

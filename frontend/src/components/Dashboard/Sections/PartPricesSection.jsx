@@ -5,6 +5,7 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import ResultBox from "../../ui/ResultBox";
 import PartPriceContext from "../../../context/PartPriceContext";
+import PartPricesResultBox from "../ResultBoxes/PartPricesResultBox";
 
 const PartPricesSection = () => {
   const { getAllPrices, getPartPrices, getLatestPartPrice, addPartPrice } = useContext(PartPriceContext);
@@ -54,7 +55,7 @@ const PartPricesSection = () => {
 
         <Button onClick={handleGetAll} className="mb-2">Get All Part Prices</Button>
 
-        <ResultBox data={allPartPricesResult} />
+        <PartPricesResultBox data={allPartPricesResult} />
       </div>
 
       {/* ===== GET BY PART ID ===== */}
@@ -67,7 +68,7 @@ const PartPricesSection = () => {
 
         <Button onClick={handleGetPartPrices} className="mb-2">Get Part Prices</Button>
 
-        <ResultBox data={partPricesResult} />
+        <PartPricesResultBox data={partPricesResult} />
       </div>
 
       {/* ===== GET LATEST ===== */}
@@ -80,7 +81,7 @@ const PartPricesSection = () => {
 
         <Button onClick={handleGetLatestPartPrice} className="mb-2">Get Latest Part Price</Button>
 
-        <ResultBox data={latestPartPriceResult} />
+        <PartPricesResultBox data={latestPartPriceResult} />
       </div>
 
       {/* ===== ADD ===== */}
@@ -97,7 +98,7 @@ const PartPricesSection = () => {
 
         <Button onClick={handleAdd} className="mb-2">Add Part Price</Button>
 
-        <ResultBox data={addResult} />
+        <PartPricesResultBox data={addResult} />
       </div>
 
     </Section>

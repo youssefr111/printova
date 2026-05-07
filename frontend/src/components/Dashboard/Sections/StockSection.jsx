@@ -5,6 +5,7 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import ResultBox from "../../ui/ResultBox";
 import StockContext from "../../../context/StockContext";
+import StockResultBox from "../ResultBoxes/StockResultBox";
 
 const StockSection = () => {
   const { getAllStock, getStockByPartId, updatePartStock, adjustPartStock } = useContext(StockContext);
@@ -58,7 +59,7 @@ const StockSection = () => {
 
         <Button onClick={handleGetAll} className="mb-2">Get All Stock</Button>
 
-        <ResultBox data={allStockResult} />
+        <StockResultBox data={allStockResult} />
       </div>
 
       {/* ===== GET BY ID ===== */}
@@ -71,7 +72,7 @@ const StockSection = () => {
 
         <Button onClick={handleGetByPartId} className="mb-2">Get Stock</Button>
 
-        <ResultBox data={stockResult} />
+        <StockResultBox data={stockResult} />
       </div>
 
       {/* ===== UPDATE ===== */}
@@ -86,7 +87,7 @@ const StockSection = () => {
 
         <Button onClick={handleUpdate} className="mb-2">Update Stock</Button>
 
-        <ResultBox data={updateResult} />
+        <StockResultBox data={updateResult} />
       </div>
 
       {/* ===== ADJUST ===== */}
@@ -101,7 +102,7 @@ const StockSection = () => {
 
         <Button onClick={handleAdjust} className="mb-2">Adjust Stock</Button>
 
-        <ResultBox data={adjustResult} />
+        <StockResultBox data={adjustResult} />
       </div>
 
     </Section>

@@ -5,6 +5,7 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import ResultBox from "../../ui/ResultBox";
 import AuthContext from "../../../context/AuthContext";
+import UserResultBox from "../ResultBoxes/UserResultBox";
 
 const UsersSection = () => {
   const { getUserById, getAllUsers, updateUserById, changePassword } = useContext(AuthContext);
@@ -63,7 +64,7 @@ const UsersSection = () => {
         </FormGrid>
 
         <Button onClick={handleGetUser} className="mb-2">Get User</Button>
-        <ResultBox data={getUserResult} />
+        <UserResultBox data={getUserResult} />
       </div>
 
       {/* ===== GET ALL USERS ===== */}
@@ -72,7 +73,7 @@ const UsersSection = () => {
         <p className="text-sm text-gray-500 mb-2">Allowed Roles: Admin only</p>
 
         <Button onClick={handleGetAllUsers} className="mb-2">Get All</Button>
-        <ResultBox data={allUsersResult} />
+        <UserResultBox data={allUsersResult} />
       </div>
 
       {/* ===== UPDATE USER ===== */}
@@ -90,7 +91,7 @@ const UsersSection = () => {
         </FormGrid>
 
         <Button onClick={handleUpdateUser} className="mb-2">Update</Button>
-        <ResultBox data={updateResult} />
+        <UserResultBox data={updateResult} />
       </div>
 
       {/* ===== CHANGE PASSWORD ===== */}
@@ -103,7 +104,7 @@ const UsersSection = () => {
         </FormGrid>
 
         <Button onClick={handleChangePassword} className="mb-2">Change Password</Button>
-        <ResultBox data={passwordResult} />
+        <UserResultBox data={passwordResult} />
       </div>
 
     </Section>

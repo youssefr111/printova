@@ -13,10 +13,9 @@ import PaymentMethodsSection from "./Sections/PaymentMethodsSection";
 import PaymentsSection from "./Sections/PaymentsSection";
 
 const AdminDashboard = () => {
-    const [activeTab, setActiveTab] = useState("auth");
+    const [activeTab, setActiveTab] = useState("users");
 
     const tabs = [
-        { id: "auth", label: "Authentication" },
         { id: "users", label: "Users" },
         { id: "roles", label: "Roles" },
         { id: "categories", label: "Categories" },
@@ -30,7 +29,6 @@ const AdminDashboard = () => {
     ];
 
     const sections = {
-        auth: <AuthSection />,
         users: <UsersSection />,
         roles: <RolesSection />,
         categories: <CategoriesSection />,

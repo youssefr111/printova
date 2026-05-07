@@ -5,6 +5,7 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import ResultBox from "../../ui/ResultBox";
 import CategoryContext from "../../../context/CategoryContext";
+import CategoryResultBox from "../ResultBoxes/CategoryResultBox";
 
 const CategoriesSection = () => {
   const { getAllCategories, getCategoryById, addCategory, updateCategory, deleteCategory } = useContext(CategoryContext);
@@ -67,7 +68,7 @@ const CategoriesSection = () => {
 
         <Button onClick={handleGetAll} className="mb-2">Get All Categories</Button>
 
-        <ResultBox data={allCategoriesResult} />
+        <CategoryResultBox data={allCategoriesResult} />
       </div>
 
       {/* ===== GET BY ID ===== */}
@@ -80,7 +81,7 @@ const CategoriesSection = () => {
 
         <Button onClick={handleGetById} className="mb-2">Get Category</Button>
 
-        <ResultBox data={categoryResult} />
+        <CategoryResultBox data={categoryResult} />
       </div>
 
       {/* ===== ADD ===== */}
@@ -97,7 +98,7 @@ const CategoriesSection = () => {
 
         <Button onClick={handleAdd} className="mb-2">Add Category</Button>
 
-        <ResultBox data={addResult} />
+        <CategoryResultBox data={addResult} />
       </div>
 
       {/* ===== UPDATE ===== */}
@@ -113,7 +114,7 @@ const CategoriesSection = () => {
 
         <Button onClick={handleUpdate} className="mb-2">Update Category</Button>
 
-        <ResultBox data={updateResult} />
+        <CategoryResultBox data={updateResult} />
       </div>
 
       {/* ===== DELETE ===== */}
@@ -127,7 +128,7 @@ const CategoriesSection = () => {
 
         <Button onClick={handleDelete} variant="danger" className="mb-2">Delete Category</Button>
 
-        <ResultBox data={deleteResult} />
+        <CategoryResultBox data={deleteResult} />
       </div>
 
     </Section>

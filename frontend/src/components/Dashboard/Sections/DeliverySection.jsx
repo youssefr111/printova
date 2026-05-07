@@ -5,6 +5,7 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import ResultBox from "../../ui/ResultBox";
 import OrderContext from "../../../context/OrderContext";
+import DeliveryResultBox from "../ResultBoxes/DeliveryResultBox";
 
 const DeliverySection = () => {
   const { getDeliveryOrders, completeOrder } = useContext(OrderContext);
@@ -55,7 +56,7 @@ const DeliverySection = () => {
 
         <Button onClick={handleGetDeliveryOrders} className="mb-2">Get All Delivery Orders</Button>
 
-        <ResultBox data={allDeliveryOrdersResult} />
+        <DeliveryResultBox data={allDeliveryOrdersResult} />
       </div>
 
       <div className="mb-6 border-b border-gray-200 dark:border-gray-700 pb-4">
@@ -67,7 +68,7 @@ const DeliverySection = () => {
 
         <Button onClick={handleCompleteOrder} className="mb-2">Complete Order</Button>
 
-        <ResultBox data={completeOrderResult} />
+        <DeliveryResultBox data={completeOrderResult} />
       </div>
 
     </Section>

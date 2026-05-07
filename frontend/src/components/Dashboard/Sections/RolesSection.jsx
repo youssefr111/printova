@@ -5,6 +5,7 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import ResultBox from "../../ui/ResultBox";
 import { RoleContext } from "../../../context/RoleContext";
+import RoleResultBox from "../ResultBoxes/RoleResultBox";
 
 const RolesSection = () => {
   const { getAllRoles, getRoleById, addRole,getUserRoles, addUserRole, removeUserRole } = useContext(RoleContext);
@@ -75,7 +76,7 @@ const RolesSection = () => {
         <p className="text-sm text-gray-500 mb-2">Allowed Roles: Admin only</p>
 
         <Button onClick={handleGetAllRoles} className="mb-2">Get All Roles</Button>
-        <ResultBox data={allRolesResult} />
+        <RoleResultBox data={allRolesResult} />
       </div>
 
       {/* ===== GET ROLE BY ID ===== */}
@@ -88,7 +89,7 @@ const RolesSection = () => {
         </FormGrid>
 
         <Button onClick={handleGetRoleById} className="mb-2">Get Role By ID</Button>
-        <ResultBox data={roleByIdResult} />
+        <RoleResultBox data={roleByIdResult} />
       </div>
 
       {/* ===== ADD ROLE ===== */}
@@ -101,7 +102,7 @@ const RolesSection = () => {
         </FormGrid>
 
         <Button onClick={handleAddRole} className="mb-2">Add Role</Button>
-        <ResultBox data={addRoleResult} />
+        <RoleResultBox data={addRoleResult} />
       </div>
 
       {/* ===== GET USER ROLES ===== */}
@@ -114,7 +115,7 @@ const RolesSection = () => {
         </FormGrid>
 
         <Button onClick={handleGetUserRoles} className="mb-2">Get User Roles</Button>
-        <ResultBox data={userRolesResult} />
+        <RoleResultBox data={userRolesResult} />
       </div>
 
       {/* ===== ADD USER ROLE ===== */}
@@ -130,7 +131,7 @@ const RolesSection = () => {
         </FormGrid>
 
         <Button onClick={handleAddUserRole} className="mb-2">Add User Role</Button>
-        <ResultBox data={addUserRoleResult} />
+        <RoleResultBox data={addUserRoleResult} />
       </div>
 
       {/* ===== REMOVE USER ROLE ===== */}
@@ -146,7 +147,7 @@ const RolesSection = () => {
         </FormGrid>
 
         <Button onClick={handleRemoveUserRole} className="mb-2">Remove User Role</Button>
-        <ResultBox data={removeUserRoleResult} />
+        <RoleResultBox data={removeUserRoleResult} />
       </div>
 
     </Section>

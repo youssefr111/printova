@@ -31,7 +31,7 @@ const HomeSection = ({ part }) => {
           <img src={partImg} className='max-h-full max-w-full object-contain' alt={part.partName} />
         </div>
 
-        <div className='flex flex-row flex-wrap justify-between items-center px-4 bg-gray-200 text-gray-600 w-full'>
+        <div className='flex flex-row flex-wrap justify-between items-center px-4 bg-gray-200 dark:bg-gray-700 dark:text-white text-gray-600 w-full'>
             <h3 className='font-bold underline wrap-break-words'>{part.categoryName}</h3>
             <h3 className=''>{part.partName}</h3>
         </div>

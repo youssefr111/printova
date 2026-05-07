@@ -5,6 +5,7 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import ResultBox from "../../ui/ResultBox";
 import PartContext from "../../../context/PartContext";
+import PartsResultBox from "../ResultBoxes/PartsResultBox";
 
 const PartsSection = () => {
   const { getAllParts, getPartById, addPart, updatePart, removePart } = useContext(PartContext);
@@ -67,7 +68,7 @@ const PartsSection = () => {
 
         <Button onClick={handleGetAll} className="mb-2">Get All Parts</Button>
 
-        <ResultBox data={allPartsResult} />
+        <PartsResultBox  data={allPartsResult} />
       </div>
 
       {/* ===== GET BY ID ===== */}
@@ -80,7 +81,7 @@ const PartsSection = () => {
 
         <Button onClick={handleGetById} className="mb-2">Get Part</Button>
 
-        <ResultBox data={partResult} />
+        <PartsResultBox  data={partResult} />
       </div>
 
       {/* ===== ADD ===== */}
@@ -100,7 +101,7 @@ const PartsSection = () => {
 
         <Button onClick={handleAdd} className="mb-2">Add Part</Button>
 
-        <ResultBox data={addResult} />
+        <PartsResultBox  data={addResult} />
       </div>
 
       {/* ===== UPDATE ===== */}
@@ -118,7 +119,7 @@ const PartsSection = () => {
 
         <Button onClick={handleUpdate} className="mb-2">Update Part</Button>
 
-        <ResultBox data={updateResult} />
+        <PartsResultBox  data={updateResult} />
       </div>
 
       {/* ===== DELETE ===== */}
@@ -132,7 +133,7 @@ const PartsSection = () => {
 
         <Button onClick={handleDelete} variant="danger" className="mb-2">Delete Part</Button>
 
-        <ResultBox data={deleteResult} />
+        <PartsResultBox  data={deleteResult} />
       </div>
 
     </Section>

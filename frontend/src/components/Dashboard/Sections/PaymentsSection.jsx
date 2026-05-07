@@ -5,6 +5,8 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import ResultBox from "../../ui/ResultBox";
 import PaymentContext from "../../../context/PaymentContext";
+import PaymentResultBox from "../ResultBoxes/PaymentResultBox";
+
 
 const PaymentsSection = () => {
   const { getAllPayments, getPaymentById } = useContext(PaymentContext);
@@ -35,7 +37,7 @@ const PaymentsSection = () => {
 
         <Button onClick={handleGetAll} className="mb-2">Get All Payments</Button>
 
-        <ResultBox data={allPaymentsResult} />
+        <PaymentResultBox data={allPaymentsResult} />
       </div>
 
       {/* ===== GET BY ID ===== */}
@@ -48,7 +50,7 @@ const PaymentsSection = () => {
 
         <Button onClick={handleGetById} className="mb-2">Get Payment</Button>
 
-        <ResultBox data={paymentResult} />
+        <PaymentResultBox data={paymentResult} />
       </div>
 
     </Section>

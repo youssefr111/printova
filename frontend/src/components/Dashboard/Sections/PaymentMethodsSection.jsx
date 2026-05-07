@@ -5,6 +5,7 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import ResultBox from "../../ui/ResultBox";
 import PaymentMethodContext from "../../../context/PaymentMethodContext";
+import PaymentMethodResultBox from "../ResultBoxes/PaymentMethodResultBox";
 
 const PaymentMethodsSection = () => {
   const { getAllPaymentMethods, getPaymentMethodById, addPaymentMethod, updatePaymentMethod, removePaymentMethod } = useContext(PaymentMethodContext);
@@ -67,7 +68,7 @@ const PaymentMethodsSection = () => {
 
         <Button onClick={handleGetAll} className="mb-2">Get All Payment Methods</Button>
 
-        <ResultBox data={allPaymentMethodsResult} />
+        <PaymentMethodResultBox data={allPaymentMethodsResult} />
       </div>
 
       {/* ===== GET BY ID ===== */}
@@ -80,7 +81,7 @@ const PaymentMethodsSection = () => {
 
         <Button onClick={handleGetById} className="mb-2">Get Payment Method</Button>
 
-        <ResultBox data={paymentMethodResult} />
+        <PaymentMethodResultBox data={paymentMethodResult} />
       </div>
 
       {/* ===== ADD ===== */}
@@ -97,7 +98,7 @@ const PaymentMethodsSection = () => {
 
         <Button onClick={handleAdd} className="mb-2">Add Payment Method</Button>
 
-        <ResultBox data={addResult} />
+        <PaymentMethodResultBox data={addResult} />
       </div>
 
       {/* ===== UPDATE ===== */}
@@ -113,7 +114,7 @@ const PaymentMethodsSection = () => {
 
         <Button onClick={handleUpdate} className="mb-2">Update Payment Method</Button>
 
-        <ResultBox data={updateResult} />
+        <PaymentMethodResultBox data={updateResult} />
       </div>
 
       {/* ===== DELETE ===== */}
@@ -127,7 +128,7 @@ const PaymentMethodsSection = () => {
 
         <Button onClick={handleDelete} variant="danger" className="mb-2">Delete Payment Method</Button>
 
-        <ResultBox data={deleteResult} />
+        <PaymentMethodResultBox data={deleteResult} />
       </div>
 
     </Section>

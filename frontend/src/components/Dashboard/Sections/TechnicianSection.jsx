@@ -5,6 +5,7 @@ import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import ResultBox from "../../ui/ResultBox";
 import MaintenanceContext from "../../../context/MaintenanceContext";
+import MaintenanceResultBox from "../ResultBoxes/MaintenanceResultBox";
 
 const TechnicianSection = () => {
   const { getTechnicianMaintenances, completeMaintenance } = useContext(MaintenanceContext);
@@ -56,7 +57,7 @@ const TechnicianSection = () => {
 
         <Button onClick={handleGetTechnicianMaintenances} className="mb-2">Get All Technician Maintenances</Button>
 
-        <ResultBox data={allTechnicianMaintenancesResult} />
+        <MaintenanceResultBox data={allTechnicianMaintenancesResult} />
       </div>
 
       <div className="mb-6 bmaintenance-b bmaintenance-gray-200 dark:bmaintenance-gray-700 pb-4">
@@ -68,7 +69,7 @@ const TechnicianSection = () => {
 
         <Button onClick={handleCompleteMaintenance} className="mb-2">Complete Maintenance</Button>
 
-        <ResultBox data={completeMaintenanceResult} />
+        <MaintenanceResultBox data={completeMaintenanceResult} />
       </div>
 
     </Section>
